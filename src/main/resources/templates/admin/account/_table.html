@@ -1,0 +1,39 @@
+<div class="card" xmlns:th="http://www.thymeleaf.org">
+
+	<div class="card-header">
+		<div th:replace="/admin/account/_filter"></div>
+	</div>
+	
+	<table class="table">
+		<thead>
+			<tr>
+				<th>No.</th>
+				<th>Avatar</th>
+				<th>Username</th>
+				<th>Full Name</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="itm, st : ${page.content}">
+				<td th:text="${st.count + (page.number * page.size)}"></td>
+				<td>
+					<img style="max-width: 100px; max-height: 100px" th:src="@{|/images/account/${itm.avatar}|}">
+				</td>
+				<td th:text="${itm.username}"></td>
+				<td th:text="${itm.fullname}"></td>
+				<th th:text="${itm.phone}"></th>
+				<th th:text="${itm.address}"></th>
+				<td>
+					<hr
+						th:replace="~{/admin/shared/fragbtn::link-crud('account',${itm.username})}" />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="card-footer">
+		<hr th:replace="~{/admin/shared/_paginate::paginate('account')}"> 
+	</div>
+</div>

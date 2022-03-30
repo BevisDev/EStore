@@ -1,0 +1,22 @@
+<div class="card" xmlns:th="http://www.thymeleaf.org">
+	<table class="table">
+	    <thead>
+	        <tr>
+	            <th>No.</th>
+	            <th>Id</th>
+	            <th>Name</th>
+	            <th>Action</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr th:each="itm, st : ${list}">
+	            <td th:text="${st.count}"></td>
+	            <td th:text="${itm.id}"></td>
+	            <td th:text="${itm.name}"></td>
+	            <td>
+	              <hr th:replace="~{/admin/shared/fragbtn::link-crud('category',${itm.id})}"/>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+</div>

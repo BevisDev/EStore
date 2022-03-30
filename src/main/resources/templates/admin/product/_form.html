@@ -1,0 +1,116 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<form th:object="${form}" method="post" class="card"
+		enctype="multipart/form-data">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-3 text-center">
+					<img th:src="@{|/images/product/*{imageOne}|}" id="image_product"
+						style="height: 215px; max-width: 90%">
+				</div>
+				<div class="col-9">
+					<div class="row mb-3">
+						<div class="col-2">
+							<label>Id</label> <input th:field="*{id}" class="form-control"
+								readonly>
+						</div>
+						<div class="col-4">
+							<label>Name</label> <input th:field="*{name}"
+								class="form-control">
+						</div>
+						<div class="col">
+							<label>UnitPrice</label> <input th:field="*{unitPrice}"
+								class="form-control">
+						</div>
+						<div class="col">
+							<label>Quantity</label> <input th:field="*{quantity}"
+								type="number" min="0" class="form-control">
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col">
+							<label>Image 1</label> <input type="file" name="image_file1"
+								class="form-control"> <input th:field="*{imageOne}"
+								type="hidden">
+						</div>
+						<div class="col">
+							<label>Image 2</label> <input type="file" name="image_file2"
+								class="form-control"> <input th:field="*{imageTwo}"
+								type="hidden">
+						</div>
+						<div class="col">
+							<label>Image 3</label> <input type="file" name="image_file3"
+								class="form-control"> <input th:field="*{imageThree}"
+								type="hidden">
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col">
+							<label>Discount</label> <input th:field="*{discount}"
+								class="form-control">
+						</div>
+						<div class="col">
+							<label>Size</label> <input th:field="*{size}"
+								class="form-control">
+						</div>
+						<div class="col">
+							<label>Color</label> <input th:field="*{color}" type="text"
+								class="form-control">
+						</div>
+						<div class="col">
+							<label>Like Count</label> <input th:field="*{likeCount}"
+								class="form-control">
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col">
+							<label>Category</label> 
+							<select th:field="*{category.id}" class="form-select">
+								<th:block th:each="c : ${categories}">
+									<option th:value="${c.id}" th:text="${c.name}"></option>
+								</th:block>
+							</select>
+						</div>
+						<!-- <div class="col">
+							<label>Brand</label> 
+							<select th:field="*{brand.id}" class="form-select">
+								<th:block th:each="c : ${brands}">
+									<option th:value="${c.id}" th:text="${c.name}"></option>
+								</th:block>
+							</select>
+						</div> -->
+						<div class="col">
+							<label>Special</label>
+							<div class="form-control">
+								<label> <input th:field="*{special}" type="radio"
+									th:value="true"> YES
+								</label> <label> <input th:field="*{special}" type="radio"
+									th:value="false"> NO
+								</label>
+							</div>
+						</div>
+						<div class="col">
+							<label>Available</label>
+							<div class="form-control">
+								<label> <input th:field="*{available}" type="radio"
+									th:value="true"> YES
+								</label> <label> <input th:field="*{available}" type="radio"
+									th:value="false"> NO
+								</label>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="mb-3">
+					<label>Description</label>
+					<textarea th:field="*{description}" class="form-control" rows="3"></textarea>
+				</div>
+			</div>
+
+		</div>
+		<div class="card-footer">
+			<hr th:replace="/admin/shared/fragbtn::btn-crud('product', *{id})">
+		</div>
+
+	</form>
+</div>

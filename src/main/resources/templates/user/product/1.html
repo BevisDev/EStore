@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/user/shared/layout :: dynamic(~{::main})}">
+
+<div class="col-lg-8" th:fragment="main">
+	<div class="row">
+		<!-- Search -->
+		<div th:replace="~{/user/shared/search}"></div>
+		<!-- End Search -->
+
+		<div class="col-md-4" th:each="p : ${list}">
+			<div class="product-item" th:attr="data-id=${p.id}">
+				<div class="product-title" style="height: 85px">
+					<a th:href="@{|/user/product/detail/${p.id}|}" th:text="${p.name}"></a>
+<!-- 					<div class="ratting">
+						<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+							class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+							class="fa fa-star"></i>
+					</div> -->
+				</div>
+				<div class="product-image">
+					<a th:href="@{|/user/product/detail/${p.id}|}"> <img
+						th:src="@{|/img/${p.image}|}" alt="Product Image">
+					</a>
+					<div class="product-action">
+						<a href="#" class="bb-add-to-cart">
+							<i class="fa fa-cart-plus"></i>
+						</a>
+						<a href="#" class="prod-like">
+							<i class="fa fa-heart"></i>
+						</a>
+						<a href="#" class="prod-share">
+							<i class="fa fa-share"></i>
+						</a>
+					</div>
+				</div>
+				<div class="product-price" style="height: 82px; display: flex">
+					<h3 style="margin-right: 10px">
+						<span>
+							<del th:if="${p.discount > 0}" th:text="@{|${#numbers.formatDecimal(p.unitPrice,0,3)} đ|}"></del>
+							<i th:text="@{|${#numbers.formatDecimal(p.promotePrice,0,3)} đ|}"></i>
+						</span>
+					</h3>
+					<a class="btn" href=""><i class="fa fa-shopping-cart"></i>MUA
+						NGAY</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Pagination Start -->
+	<div th:replace="/user/shared/paginate"></div>
+	<!-- Pagination Start -->
+	
+	<!-- Share Dialog -->
+	<div th:replace="/user/product/_share-dialog"></div>
+</div>
+</html>

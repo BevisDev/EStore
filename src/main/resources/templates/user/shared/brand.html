@@ -1,0 +1,33 @@
+<div class="brands" xmlns:th="http://www.thymeleaf.org">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="brands_slider_container">
+
+					<!-- Brands Slider -->
+
+					<div class="owl-carousel owl-theme brands_slider">
+					<th:block th:each="b : ${brands}">
+						<div class="owl-item">
+							<div
+								class="brands_item d-flex flex-column justify-content-center">
+								<img th:src="@{|/images/brand/${b.logo}|}" alt="">
+							</div>
+						</div>
+					</th:block>
+						
+					</div>
+
+					<!-- Brands Slider Navigation -->
+					<div class="brands_nav brands_prev">
+						<i class="fas fa-chevron-left"></i>
+					</div>
+					<div class="brands_nav brands_next">
+						<i class="fas fa-chevron-right"></i>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<html th:replace="/user/shared/layout::dynamic(~{::main})" xmlns:th="http://www.thymeleaf.org">
+<main class="container-fluid mt-3">
+    <h3 class="alert alert-success">LOGIN</h3>
+    <div th:text="${message}"></div>
+    <form action="/spring/login" method="post">
+        <div class="mb-3">
+            <label>Username</label>
+            <input name="username" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label>Password</label>
+            <input name="password" class="form-control">
+        </div>
+        <div class="mb-3">
+            <input name="remember-me" type="checkbox">
+            <label>Remember me?</label>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</main>
+
+</html>

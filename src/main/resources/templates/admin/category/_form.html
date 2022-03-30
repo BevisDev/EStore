@@ -1,0 +1,19 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<form th:object="${form}" method="post" class="card was-validated">
+		<div class="card-body">
+			<div class="mb-3">
+				<label>Category Id</label> 
+				<input th:field="*{id}"
+					class="form-control" placeholder="Auto Number" readonly>
+			</div>
+			<div class="mb-3">
+				<label>Category Name</label> <i class="text-danger float-end">Please
+					fill out this field.</i> 
+				<input th:field="*{name}" class="form-control" required>
+			</div>
+		</div>
+		<div class="card-footer">
+			<hr th:replace="/admin/shared/fragbtn::btn-crud('category', *{id})"/>
+		</div>
+	</form>
+</div>

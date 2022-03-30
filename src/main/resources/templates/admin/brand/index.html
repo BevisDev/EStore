@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/shared/layout :: dynamic(~{::view})}">
+<div style="margin: 25px" th:fragment="view">
+	    <div class="alert alert-secondary">
+	    	<b><i class="bx bx-category"></i> BRAND MANAGEMENT</b>
+	    	<i class="float-end text-danger" th:text="${message}"></i>
+	    </div>
+	    
+		<!-- Nav tabs -->
+	    <ul class="nav nav-tabs">
+	        <li class="nav-item">
+	            <a class="nav-link active" data-bs-toggle="tab" href="#edit">
+	            	<i class='bx bxs-edit'></i> EDIT BRAND
+	            </a>
+	        </li>
+	        <li class="nav-item">
+	            <a class="nav-link" data-bs-toggle="tab" href="#list">
+	            	<i class='bx bx-list-ol'></i> LIST OF BRAND
+	            </a>
+	        </li>
+	    </ul>
+	    <!-- Tab panes -->
+	    <div class="tab-content">
+	        <div class="tab-pane active" id="edit">
+	            <div th:replace="/admin/brand/_form"></div>
+	        </div>
+	        <div class="tab-pane fade" id="list">
+	            <div th:replace="/admin/brand/_table"></div>
+	        </div>
+	    </div>
+	</div>
+
+</html>
+

@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="sidebar_section">
+	<div class="sidebar_subtitle brands_subtitle">Brands</div>
+	<ul th:each="brand : ${brands} " class="brands_list">
+		<li class="brand">
+			<a th:href="@{|/user/product/brand/${brand.id}|}"
+				th:text="${brand.name}"></a>
+		</li>
+	</ul>
+</div>
+</html>

@@ -1,0 +1,32 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<form th:object="${form}" method="post" class="card was-validated"
+		enctype="multipart/form-data">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-3 text-center">
+					<img th:src="@{|/images/brand/*{logo}|}" id="image_logo"
+						style="height: 215px; max-width: 90%">
+				</div>
+				<div class="col-9">
+					<div class="mb-3">
+						<label>Brand Id</label> <input th:field="*{id}"
+							class="form-control" placeholder="Auto Number" readonly>
+					</div>
+					<div class="mb-3">
+						<label>Brand Name</label> <i class="text-danger float-end">Please
+							fill out this field.</i> <input th:field="*{name}"
+							class="form-control" required>
+					</div>
+					<div class="mb-3">
+						<label>Brand logo</label> <input type="hidden" th:field="*{logo}">
+						<input type="file" name="imageLogo" class="form-control">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer">
+			<hr th:replace="/admin/shared/fragbtn::btn-crud('brand', *{id})" />
+		</div>
+
+	</form>
+</div>

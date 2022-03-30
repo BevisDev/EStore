@@ -1,0 +1,53 @@
+<div class="card" xmlns:th="http://www.thymeleaf.org">
+	<table class="table">
+		<thead style="font-variant: small-caps;">
+			<tr>
+				<th>No.</th>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Unit Price</th>
+				<th>Quantity</th>
+				<th>Discount</th>
+				<th>Image 1</th>
+				<th>Image 2</th>
+				<th>Image 3</th>
+				<th>Product Date</th>
+				<th>Special?</th>
+				<!-- <th>Des</th> -->
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="itm, st : ${page.content}">
+				<td th:text="${st.count + page.number * page.size}"></td>
+				<td th:text="${itm.id}"></td>
+				<td th:text="${itm.name}"></td>
+				<td th:text="${itm.unitPrice}"></td>
+				<td th:text="${itm.discount}"></td>
+				<td th:text="${itm.quantity}"></td>
+				<td>
+					<img style="max-width: 100px; max-height: 100px" th:src="@{|/images/product/${itm.imageOne}|}">
+				</td>
+				<td>
+					<img style="max-width: 100px; max-height: 100px" th:src="@{|/images/product/${itm.imageTwo}|}">
+				</td>
+			<td>
+					<img style="max-width: 100px; max-height: 100px" th:src="@{|/images/product/${itm.imageThree}|}">
+				</td>
+				<td th:text="${itm.productDate}"></td>
+				<td th:text="${itm.special?'Yes':'No'}"></td>
+				<!-- <td>
+					<p th:text="${itm.description}"></p>
+				</td> -->
+				<td>
+					<hr
+						th:replace="/admin/shared/fragbtn::link-crud('product', ${itm.id})" />
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="card-footer">
+	 <hr th:replace="~{/admin/shared/_paginate::paginate('product')}" >
+	</div>
+
+</div>
