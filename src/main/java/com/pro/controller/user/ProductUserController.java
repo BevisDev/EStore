@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
+import java.util.regex.Pattern;
+
 import com.pro.entity.Product;
 import com.pro.entity.Share;
 import com.pro.inter.ProductService;
@@ -33,32 +35,32 @@ public class ProductUserController {
 	
 	@RequestMapping("/index")
 	public String index(Model model){
-		Integer cid = sessionService.get("cid", 1);
-		Integer pageNumber = sessionService.get("pageNumber", 0);
-		Pageable pageable = PageRequest.of(pageNumber,10);
-		Page<Product> page = productService.findByCategoryId(cid, pageable);
+		Page<Product> page = productService.findAll(Pageable.unpaged());
 		model.addAttribute("page", page);
 		return "user/product/list";
 	}
 	
-	@RequestMapping("/paginate/{pageNumber}")
-	public String paginate(@PathVariable("pageNumber") Integer pageNumber) {
+	@RequestMapping("/paginate/")
+	public String paginate(@RequestParam("page") String pageNumber) {
 		sessionService.set("pageNumber", pageNumber);
 		return "forward:/user/product/index";
 	}
 	
 	// hien thi list theo category
-	@RequestMapping("/category/{id}")
-	public String List(@PathVariable("id") Integer id) {
-		sessionService.set("cid", id);
-		return "forward:/user/product/index";
+	@RequestMapping("/category")
+	public String List(Model model,@RequestParam("id") String id,
+			@RequestParam(name="page", defaultValue = "0") String pageNumber) {
+		Pageable pageable = PageRequest.of(Integer.valueOf(pageNumber), 10);
+		Page<Product> page = productService.findByCategoryId(Integer.valueOf(id), pageable);
+		model.addAttribute("page", page);
+		return "user/product/list";
 	}
 	
 	// search theo keywords
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam("keywords") String keywords) {
-		sessionService.set("keywords", keywords);
-		Pageable pageable = PageRequest.of(0, 1);
+	public String search(Model model, @RequestParam("keywords") String keywords,
+		@RequestParam(name="page", defaultValue = "0") String pageNumber) {
+		Pageable pageable = PageRequest.of(Integer.valueOf(pageNumber), 10);
 		Page<Product> page = productService.findByKeywords(keywords, pageable);
 		model.addAttribute("page", page);
 		return "user/product/list";

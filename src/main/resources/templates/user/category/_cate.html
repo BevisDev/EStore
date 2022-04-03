@@ -4,7 +4,7 @@
 		<div class="sidebar_title">Categories</div>
 		<ul class="sidebar_categories"> 
 		<th:block th:each="cate: ${categories}">
-			<li><a th:href="@{|/user/product/category/${cate.id}|}"
+			<li><a th:href="@{|/user/product/category?id=${cate.id}|}"
 				th:text="${cate.name}"></a></li>
 		</th:block>
 		</ul>

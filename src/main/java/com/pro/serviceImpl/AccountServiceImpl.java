@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pro.admin.bean.AccountFilter;
@@ -29,6 +30,9 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
 	RoleDAO roleDAO;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
 	public void create(Account account) {
@@ -120,4 +124,8 @@ public class AccountServiceImpl implements AccountService {
 		}
 	}
 
+	/*
+	 * public void setNewPassword(Account account, String newPassword) {
+	 * account.setPassword(passwordEncoder.encode(newPassword)); }
+	 */
 }

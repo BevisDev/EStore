@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "accounts")
 public class Account {
-
 	@Id
 	String username;
 	String password;
@@ -30,7 +29,7 @@ public class Account {
 	String email;
 	String phone;
 	String avatar = "user.png";
-	Boolean activated;
+	boolean activated;
 	String address;
 
 	@OneToMany(mappedBy = "account", fetch = FetchType.EAGER)

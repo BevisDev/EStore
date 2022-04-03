@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+/*import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;*/
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Configuration
@@ -26,21 +28,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().disable().csrf().disable();
-		http.authorizeHttpRequests().antMatchers("/order/checkout")
-		.authenticated().anyRequest().permitAll();
+		http.authorizeHttpRequests().antMatchers("/order/checkout").authenticated().anyRequest().permitAll();
 		// => từ chối nếu truy cập với vai trò không hợp lệ
 		http.exceptionHandling().accessDeniedPage("/security/access/denied");
 
 		// => cấu hình form đăng nhập và đăng xuất
-		http.formLogin().loginProcessingUrl("/spring/login")
-		.loginPage("/security/login/form")
-		.defaultSuccessUrl("/security/login/success")
-		.failureUrl("/security/login/failure");
+		http.formLogin().loginProcessingUrl("/spring/login").loginPage("/security/login/form")
+				.defaultSuccessUrl("/security/login/success").failureUrl("/security/login/failure");
 		http.rememberMe().tokenValiditySeconds(5 * 24 * 60 * 60);
 
-		http.logout().logoutUrl("/spring/logout")
-		.logoutSuccessUrl("/security/logout/success")
-		.addLogoutHandler(new SecurityContextLogoutHandler());
+		http.logout().logoutUrl("/spring/logout").logoutSuccessUrl("/security/logout/success")
+				.addLogoutHandler(new SecurityContextLogoutHandler());
 	}
 
 	@Override
@@ -48,8 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/js/**", "/admin/**", "/_action/**", "/images/**", "/plugins/**", "/styles/**");
 	}
 
-	@Bean(name = "BCryptPasswordEncoder")
-	public static BCryptPasswordEncoder getBCryptPasswordEncoder() {
+	@Bean
+	public  BCryptPasswordEncoder getBCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 }

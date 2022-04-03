@@ -1,75 +1,79 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{/user/shared/layout :: dynamic(~{::main})}">
-
-<div class="cart_section" th:fragment="main">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-10 offset-lg-1">
-				<div class="cart_container">
-					<div class="cart_title">Shopping Cart</div>
-					<div class="cart_items">
-						<ul class="cart_list" th:each="item : ${cart.items}" th:attr="data-id = ${item.product.id}, data-price=${item.product.promotePrice}">
-							<th:block th:object="${item.product}">
-								<li class="cart_item clearfix">
-									<div class="cart_item_image">
-										<img th:src="@{|/images/product/*{imageOne}|}">
-									</div>
-									<div
-										class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-										<div class="cart_item_name cart_info_col">
-											<div class="cart_item_title">Name</div>
-											<div class="cart_item_text" th:text="*{name}"></div>
+<th:block th:fragment="main">
+	<div class="cart_section" th:fragment="scart">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1">
+					<div class="cart_container">
+						<div class="cart_title">Shopping Cart</div>
+						<div class="cart_items">
+							<ul class="cart_list" th:each="item : ${cart.items}"
+								th:attr="data-id = ${item.product.id}, data-price=${item.product.promotePrice}">
+								<th:block th:object="${item.product}">
+									<li class="cart_item clearfix">
+										<div class="cart_item_image">
+											<img th:src="@{|/images/product/*{imageOne}|}">
 										</div>
-										<div class="cart_item_color cart_info_col">
-											<div class="cart_item_title">Color</div>
-											<div class="cart_item_text" th:text="*{color}">
-											
+										<div
+											class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+											<div class="cart_item_name cart_info_col">
+												<div class="cart_item_title">Name</div>
+												<div class="cart_item_text" th:text="*{name}"></div>
+											</div>
+											<div class="cart_item_color cart_info_col">
+												<div class="cart_item_title">Color</div>
+												<div class="cart_item_text" th:text="*{color}"></div>
+											</div>
+											<div class="cart_item_quantity cart_info_col">
+												<div class="cart_item_title">Quantity</div>
+												<div class="cart_item_text">
+													<input th:value="${item.qty}" class="bb-cart-update"
+														type="number" min="1" style="width: 60px;">
+												</div>
+											</div>
+											<div class="cart_item_price cart_info_col">
+												<div class="cart_item_title">Price</div>
+												<div class="cart_item_text"
+													th:text="@{|$${#numbers.formatDecimal(item.product.unitPrice,0,2)}|}"></div>
+											</div>
+											<div class="cart_item_total cart_info_col">
+												<div class="cart_item_title">Total</div>
+												<div class="cart_item_text item-amount"
+													th:text="@{|$${#numbers.formatDecimal(item.product.promotePrice * item.qty,0,2)}|}"></div>
+											</div>
+											<div class="cart_item_total cart_info_col">
+												<div class="cart_item_title text-center">Action</div>
+												<div class="cart_item_text">
+													<button type="button"
+														class="btn btn-sm btn-danger bb-remove-from-cart">
+														<i class="fa fa-trash"></i> DELETE
+													</button>
+												</div>
 											</div>
 										</div>
-										<div class="cart_item_quantity cart_info_col">
-											<div class="cart_item_title">Quantity</div>
-											<div class="cart_item_text">
-											<input th:value="${item.qty}" class="bb-cart-update" type="number" min="1" style="width: 60px;">
-											</div>
-										</div>
-										<div class="cart_item_price cart_info_col">
-											<div class="cart_item_title">Price</div>
-											<div class="cart_item_text" th:text="@{|$${#numbers.formatDecimal(item.product.unitPrice,0,2)}|}"></div>
-										</div>
-										<div class="cart_item_total cart_info_col">
-											<div class="cart_item_title">Total</div>
-											<div class="cart_item_text item-amount"
-												th:text="@{|$${#numbers.formatDecimal(item.product.promotePrice * item.qty,0,2)}|}"></div>
-										</div>
-										<div class="cart_item_total cart_info_col">
-											<div class="cart_item_title text-center">Action</div>
-											<div class="cart_item_text">
-											<button type="button" class="btn btn-sm btn-danger bb-remove-from-cart">
-											<i class="fa fa-trash"></i> DELETE</button>
-											</div>
-										</div>
-									</div>
-								</li>
-							</th:block>
-						</ul>
-					</div>
-
-					<!-- Order Total -->
-					<div class="order_total">
-						<div class="order_total_content text-md-right">
-							<div class="order_total_title">Order Total:</div>
-							<div class="order_total_amount">$2000</div>
+									</li>
+								</th:block>
+							</ul>
 						</div>
-					</div>
 
-					<div class="cart_buttons">
-						<a href="/cart/clear" type="button" class="button cart_button_clear">CLEAR ALL</a>
-						<a href="/order/checkout" class="button cart_button_checkout">CHECKOUT</a>
+						<!-- Order Total -->
+						<div class="order_total">
+							<div class="order_total_content text-md-right">
+								<div class="order_total_title">Order Total:</div>
+								<div class="order_total_amount">$2000</div>
+							</div>
+						</div>
+
+						<div class="cart_buttons">
+							<a href="/cart/clear" type="button"
+								class="button cart_button_clear">CLEAR ALL</a> <a
+								href="/order/checkout" class="button cart_button_checkout">CHECKOUT</a>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
+</th:block>
 </html>

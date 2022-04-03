@@ -4,7 +4,7 @@ $(document).ready(function() {
 		$(".cart-amount").html(json.amount.toFixed(2)+ '$');
 	}
 
-	 fetch(`/card/info`).then(resp => resp.json()).then(json => {
+	 fetch(`/cart/info`).then(resp => resp.json()).then(json => {
 		showCartInfo(json);
 	});
 

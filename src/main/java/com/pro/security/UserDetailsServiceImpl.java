@@ -1,6 +1,7 @@
 package com.pro.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -8,22 +9,31 @@ import org.springframework.stereotype.Service;
 
 import com.pro.dao.AccountDAO;
 import com.pro.entity.Account;
+//import com.pro.inter.AccountService;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Autowired
 	AccountDAO dao;
+	
+	/*
+	 * @Autowired
+	 * 
+	 * @Lazy AccountService accountService;
+	 */
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
 			Account account = dao.findById(username).get();
 			UserDetails userDetails = new UserDetailsImpl(account);
+//			accountService.setNewPassword(account, "123");
+//			dao.save(account);
+			return userDetails;
 		} catch (Exception e) {
-			throw new UsernameNotFoundException(username + "not found!");
-		}
-		return null;
+			throw new UsernameNotFoundException(username + " not found!");
+		}	
 	}
 
 }

@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class UserDetailsImpl implements UserDetails {
+	
 	@Getter @Setter
 	private Account account;
 
@@ -58,7 +59,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return account.getActivated();
+		return account.isActivated();
 	}
 	
 
