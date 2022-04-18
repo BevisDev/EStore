@@ -35,5 +35,6 @@ public interface AccountDAO extends JpaRepository<Account, String>{
 			+ "AND (o.username LIKE ?1 OR o.email LIKE ?1 OR o.fullname LIKE ?1 OR o.phone LIKE ?1)"
 			+ "AND o.activated = ?2" )
 	Page<Account> findAdminByKeywordAndActive(String keyword, boolean b, Pageable pageable);
+
 	
 }

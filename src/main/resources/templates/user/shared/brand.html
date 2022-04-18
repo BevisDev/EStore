@@ -1,33 +1,24 @@
-<div class="brands" xmlns:th="http://www.thymeleaf.org">
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<div class="brands_slider_container">
-
-					<!-- Brands Slider -->
-
-					<div class="owl-carousel owl-theme brands_slider">
-					<th:block th:each="b : ${brands}">
-						<div class="owl-item">
-							<div
-								class="brands_item d-flex flex-column justify-content-center">
-								<img th:src="@{|/images/brand/${b.logo}|}" alt="">
-							</div>
-						</div>
-					</th:block>
-						
-					</div>
-
-					<!-- Brands Slider Navigation -->
-					<div class="brands_nav brands_prev">
-						<i class="fas fa-chevron-left"></i>
-					</div>
-					<div class="brands_nav brands_next">
-						<i class="fas fa-chevron-right"></i>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="brand" style="margin-top: 50px;" xmlns:th="http://www.thymeleaf.org">
+    <div class="container-fluid">
+        <div class="brand-slider" style="height: 100px">
+            <div class="brand-item">
+                <img src="/img/brand-1.png" alt="">
+            </div>
+            <div class="brand-item">
+                <img src="/img/brand-2.png" alt="">
+            </div>
+            <div class="brand-item">
+                <img src="/img/brand-3.png" alt="">
+            </div>
+            <div class="brand-item">
+                <img src="/img/brand-4.png" alt="">
+            </div>
+            <div class="brand-item">
+                <img src="/img/brand-5.png" alt="">
+            </div>
+            <div class="brand-item">
+                <img src="/img/brand-6.png" alt="">
+            </div>
+        </div>
+    </div>
 </div>

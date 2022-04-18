@@ -1,34 +1,27 @@
-<div  xmlns:th="http://www.thymeleaf.org">
-	<ul class="pagination justify-content-center my-1">
-		<li th:class="@{|page-item ${page.first ? 'disabled' : ''}|}">
-			<a class="page-link" href="#"
-			th:data-page="0">
-			<i class='bx bxs-chevrons-up'>First</i>
-			</a>
-		</li>
-	
-		<li th:each="n: ${#numbers.sequence(0, page.totalPages-1)}" class="page-item">
-			<a class="page-link" href="#"
-			th:data-page="@{|${n}|}">
-			 	<span th:text="${n + 1}"></span>
-			</a>
-		</li>
+<div class="col-md-12" xmlns:th="http://www.thymeleaf.org">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li th:classappend="${page.first ? 'disabled' : ''}" class="page-item">
+                <a class="page-link" href="#" th:data-page="0"
+                tabindex="-1">First</a></li>
+            <li th:each="n: ${#numbers.sequence(0, page.totalPages-1)}" class="page-item">
+                <a class="page-link" href="#" th:data-page="@{|${n}|}" th:text="${n + 1}"></a>
+            </li>
+            <li th:classappend="${page.last ? 'disabled' : ''}" class="page-item">
+                <a class="page-link" href="#" th:data-page="@{|${page.totalPages - 1}|}">Last</a>
+            </li>
 
-		<li th:class="@{|page-item ${page.last ? 'disabled':''}|}">
-			<a class="page-link" href="#"
-			th:data-page="@{|${page.totalPages - 1}|}">Last
-			<i class='bx bxs-chevrons-down'></i>
-			</a>
-		</li>
-		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				$('.pagination .page-item>.page-link').click(e => {
-					const page = e.delegateTarget.dataset.page;
-					const url = new URL(location.href);
-					url.searchParams.set('page', page);
-					location.href = url.toString();			
-				});
-			});
-		</script>
-	</ul>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    $('.pagination .page-item>.page-link').click(e => {
+                        const page = e.delegateTarget.dataset.page;
+                        const url = new URL(location.href);
+                        url.searchParams.set('page', page);
+                        location.href = url.toString();			
+                    });
+                });
+            </script>
+
+        </ul>
+    </nav>
 </div>

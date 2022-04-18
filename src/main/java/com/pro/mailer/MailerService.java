@@ -2,6 +2,8 @@ package com.pro.mailer;
 
 import javax.mail.MessagingException;
 
+import com.pro.entity.Account;
+import com.pro.entity.Order;
 import com.pro.entity.Share;
 
 public interface MailerService {
@@ -20,4 +22,10 @@ public interface MailerService {
 	void addToQueue(Mail mail);
 
 	void sendShare(Share share);
+
+	void sendOrder(Order order);
+
+	void sendWellcome(Account account);
+
+	void sendToken(String token, String email);
 }

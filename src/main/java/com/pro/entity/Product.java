@@ -62,10 +62,6 @@ public class Product {
 	Category category;
 	
 	@ManyToOne
-	@JoinColumn(name = "subcategoryid")
-	SubCategory subCategory;
-	
-	@ManyToOne
 	@JoinColumn(name = "brandid")
 	Brand brand;
 

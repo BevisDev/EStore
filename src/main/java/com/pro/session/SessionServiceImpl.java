@@ -28,4 +28,10 @@ public class SessionServiceImpl implements SessionService {
 		session.removeAttribute(name);
 	}
 
+	@Override
+	public <T> T get(String name) {
+		T value = (T) session.getAttribute(name);
+		return value;
+	}
+
 }

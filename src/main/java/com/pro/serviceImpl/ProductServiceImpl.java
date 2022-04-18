@@ -42,11 +42,11 @@ public class ProductServiceImpl implements ProductService {
 		return dao.findByFavorite(pageable);
 	}
 
-	@Override
-	public List<Product> findByBestSellerIds(Pageable pageable) {
-		Page<Integer> ids = dao.findByBestSellerIds(pageable);
-		return dao.findAllById(ids.getContent());
-	}
+//	@Override
+//	public List<Product> findByBestSellerIds(Pageable pageable) {
+//		Page<Integer> ids = dao.findByBestSellerIds(pageable);
+//		return dao.findAllById(ids.getContent());
+//	}
 
 	@Override
 	public Page<Product> findBySpecial(Pageable pageable) {
@@ -78,6 +78,26 @@ public class ProductServiceImpl implements ProductService {
 	public Page<Product> findAll(Pageable pageable) {
 		return dao.findAll(pageable);
 	}
+
+	@Override
+	public Page<Product> findBySmallPrice(Pageable pageable) {
+		return dao.findBySmallPrice(pageable);
+	}
+
+	@Override
+	public Page<Product> findByMediumPrice(Pageable pageable) {
+		return dao.findByMediumPrice(pageable);
+	}
+
+	@Override
+	public Page<Product> findByLargePrice(Pageable pageable) {
+		return dao.findByLargePrice(pageable);
+	}
+
+//	@Override
+//	public List<Product> findByUserName(String username) {
+//		return dao.findByUserName(username);
+//	}
 
 
 }

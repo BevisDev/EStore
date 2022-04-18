@@ -31,7 +31,7 @@ public class CategoryAdController {
 		return "redirect:/admin/category/index";
 	}
 
-	@RequestMapping("create")
+	@RequestMapping("/create")
 	public String create(Model model, @ModelAttribute("form") Category cate) {
 		categoryService.create(cate);
 		model.addAttribute("message", "Create successfully!");
@@ -42,8 +42,6 @@ public class CategoryAdController {
 	public String update(Model model, @ModelAttribute("form") Category cate) {
 		categoryService.update(cate);
 		model.addAttribute("message", "Update successfully!");
-		List<Category> list = categoryService.findAll();
-		model.addAttribute("list", list);
 		return this.DanhSach(model);
 	}
 
@@ -58,7 +56,6 @@ public class CategoryAdController {
 	public String delete(Model model, @PathVariable("id") Integer id) {
 		categoryService.deleteById(id);
 		model.addAttribute("message", "Delete successfully!");
-
 		model.addAttribute("form", new Category());
 		return this.DanhSach(model);
 	}

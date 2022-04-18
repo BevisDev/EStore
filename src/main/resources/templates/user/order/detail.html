@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org"
+th:replace="~{/user/shared/layout::dynamic(~{::main})}" >
+<main>
+	<h3 class="alert alert-success">BILL ORDER</h3>
+	<form th:object="${item}" action="/user/order/purchase" class="card" method="post">
+    	<div class="card-body">
+    		<div class="row mb-3">
+		        <div class="col">
+		            <label>Customer</label>
+		            <input th:field="*{account.username}" class="form-control" readonly>
+		        </div>
+		        <div class="col">
+		            <label>Order Date</label>
+		            <input th:field="*{orderDate}" class="form-control" readonly>
+		        </div>
+		        <div class="col">
+		            <label>Total Amount</label>
+		            <input th:field="*{total}" class="form-control" readonly>
+		        </div>
+	        </div>
+	        <div class="row mb-3">
+		        <div class="col">
+		            <label>Recipient</label>
+		            <input th:field="*{recipient}" class="form-control" readonly>
+		        </div>
+		        <input type="hidden" th:field="*{paymentId}">
+				<input type="hidden" th:field="*{paymentAmount}">
+		        <div class="col">
+		            <label>Phone</label>
+		            <input th:field="*{phone}" class="form-control" readonly>
+		        </div>
+		        <div class="col-4">
+		            <label>Ship Address</label>
+		            <input th:field="*{address}" class="form-control" readonly>
+		        </div>
+		        <div class="col-4">
+		            <label>Status</label>
+		            <input th:field="*{status.name}" class="form-control" readonly>
+		        </div>
+	        </div>
+	        <div class="mb-3">
+	            <label>Notes</label>
+	            <textarea th:field="*{notes}" class="form-control" rows="4" readonly></textarea>
+	        </div>
+	       <div th:replace="/user/order/order-lines"></div> 	
+        </div>
+        <div th:if="*{status.id == 2}" class="card-footer">
+            <a th:href="@{|/user/order/cancel/*{id}|}" class="btn btn-primary">Cancel</a>
+        </div>
+    </form>
+</main>
+</html>

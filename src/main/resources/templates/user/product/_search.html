@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="product-view-top">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="product-search">
+			<form action="/product/search">
+				<input th:value="${param.keywords}" name="keywords" type="search"
+				placeholder="Search for products...">
+				<button>
+					<i class="fa fa-search"></i>
+				</button>
+			</form>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="product-short">
+				<div class="dropdown">
+					<div class="dropdown-toggle" data-toggle="dropdown">Product
+						short by</div>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a href="/product/newest" class="dropdown-item">Newest</a> 
+						<a href="/product/favorite" class="dropdown-item">Favoritest</a> 
+						<a href="/product/special" class="dropdown-item">Special</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="product-price-range">
+				<div class="dropdown">
+					<div class="dropdown-toggle" data-toggle="dropdown">Product
+						price range</div>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a href="/product/small-price" class="dropdown-item">$0 to $500</a> 
+						<a href="/product/medium-price" class="dropdown-item">$500 to $1800</a> 
+						<a href="/product/large-price" class="dropdown-item">Greater $1800</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</html>

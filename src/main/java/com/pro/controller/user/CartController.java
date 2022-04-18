@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pro.cart.CartService;
@@ -21,7 +22,7 @@ public class CartController {
 	@RequestMapping("/cart/view")
 	public String view(Model model) {
 		model.addAttribute("cart", cartService);
-		return "/cart/index";
+		return "cart/index";
 	}
 	
 	@RequestMapping("/cart/add/{id}")
@@ -33,7 +34,8 @@ public class CartController {
 	@RequestMapping("/cart/remove/{id}")
 	public String remove(@PathVariable("id") Integer id) {
 		cartService.remove(id);
-		return "forward:/cart/info";
+//		return "forward:/cart/info";
+		return "redirect:/cart/view";
 	}
 	
 	@RequestMapping("/cart/update/{id}/{qty}")
@@ -53,5 +55,12 @@ public class CartController {
 	@RequestMapping("/cart/info")
 	public Object getInfo() {
 		return Map.of("count", cartService.getCount(), "amount", cartService.getAmount());
+	}
+	
+	@RequestMapping("/detail/update/{id}")
+	public String update(@PathVariable("id") Integer id,
+			@RequestParam("qty") String qty) {
+		cartService.update(id, Integer.valueOf(qty));
+		return "forward:/cart/info";
 	}
 }

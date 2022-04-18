@@ -9,7 +9,6 @@ import com.pro.admin.bean.AccountFilter;
 import com.pro.entity.Account;
 
 public interface AccountService {
-	
 	void create(Account account);
 
 	void update(Account account);
@@ -27,6 +26,8 @@ public interface AccountService {
 	void create(Account account, List<String> roleIds);
 
 	void update(Account account, List<String> roleIds);
+
+	boolean existByUserName(String username);
 
 	/* void setNewPassword(Account account, String newPassword); */
 }

@@ -1,0 +1,35 @@
+<div class="cart-page-inner" th:fragment="scart" xmlns:th="http://www.thymeleaf.org">
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>Product</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Discount</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody class="align-middle">
+				<th:block th:each="item : ${cart.items}">
+					<tr>
+						<td>
+							<div class="img">
+								<a th:href="@{|/user/product/detail/${item.product.id}|}"><img
+									th:src="@{|/images/product/${item.product.imageOne}|}"
+									alt="Image" style="height: 60px; width: 60px" /></a>
+								<p th:text="${item.product.name}">Product Name</p>
+							</div>
+						</td>
+						<td
+							th:text="@{|$${#numbers.formatDecimal(item.product.unitPrice,0,2)}|}">$99</td>
+						<td th:text="${item.qty}"></td>
+						<td th:text="@{|${item.product.discount}%|}">$99</td>
+						<td class="item-amount"
+							th:text="@{|$${#numbers.formatDecimal(item.product.promotePrice * item.qty ,0,2)}|}">$99</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+</div>

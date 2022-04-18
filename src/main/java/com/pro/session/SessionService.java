@@ -21,4 +21,6 @@ public interface SessionService {
 	 * @param name tên attribute cần xóa
 	 */
 	void remove(String name);
+
+	<T> T get(String name);
 }

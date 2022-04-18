@@ -1,5 +1,7 @@
 package com.pro.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,12 +26,12 @@ public interface ProductDAO extends JpaRepository<Product, Integer>{
 			+ "WHERE o.likeCount > 0 ORDER BY o.likeCount DESC")
 	Page<Product> findByFavorite(Pageable pageable);
 	
-	// lấy các nhóm id của product mà tổng tiền bán cao nhất)
-	@Query("SELECT d.product.id "
-			+ " FROM OrderDetail d "
-			+ " GROUP BY d.product.id"
-			+ " ORDER BY sum(d.unitPrice * d.quantity * (1 - d.discount)) DESC")
-	Page<Integer> findByBestSellerIds(Pageable pageable);
+//	// lấy các nhóm id của product mà tổng tiền bán cao nhất)
+//	@Query("SELECT d.product.id "
+//			+ " FROM OrderDetail d "
+//			+ " GROUP BY d.product.id"
+//			+ " ORDER BY sum(d.unitPrice * d.quantity * d.promotePrice) DESC")
+//	Page<Integer> findByBestSellerIds(Pageable pageable);
 
 	@Query("SELECT o FROM Product o "
 			+ "WHERE o.special = true")
@@ -37,5 +39,19 @@ public interface ProductDAO extends JpaRepository<Product, Integer>{
 
 	@Query("SELECT o FROM Product o WHERE o.category.id = ?1")
 	Page<Product> findPageByCategoryId(Integer cid, Pageable pageable);
+
+	@Query("SELECT o FROM Product o WHERE o.unitPrice < 500 ORDER BY o.unitPrice DESC")
+	Page<Product> findBySmallPrice(Pageable pageable);
+
+	@Query("SELECT o FROM Product o WHERE o.unitPrice BETWEEN 500 AND 1800 ORDER BY o.unitPrice DESC")
+	Page<Product> findByMediumPrice(Pageable pageable);
+
+	@Query("SELECT o FROM Product o WHERE o.unitPrice > 1800 ORDER BY o.unitPrice DESC")
+	Page<Product> findByLargePrice(Pageable pageable);
+
+//	@Query("SELECT o.product FROM OrderDetail o WHERE o.order.account.username=?1")
+//	List<Product> findByUserName(String username);
+
+
 		
 }

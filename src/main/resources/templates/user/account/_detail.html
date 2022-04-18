@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="tab-pane fade" id="account-tab" role="tabpanel"
+	aria-labelledby="account-nav">
+	<h4>Account Details
+		<i class="float-right text-danger" style="font-size: 18px">[[${message}]]</i>
+	</h4>
+
+	<form th:object="${form}" action="/user/account/edit-profile"
+		method="post" enctype="multipart/form-data">
+		<div class="row">
+			<div class="col-md-4">
+				<input class="form-control" th:field="*{username}" readonly
+					type="text">
+			</div>
+			<div class="col-md-4">
+				<input th:field="*{fullname}" class="form-control" type="text"
+					placeholder="Full name">
+
+			</div>
+			<div class="col-md-4">
+				<input th:field="*{phone}" class="form-control" type="text"
+					placeholder="Number Phone">
+			</div>
+			<div class="col-md-4">
+				<input type="file" name="avatar_file" class="form-control">
+				<input th:field="*{avatar}" type="hidden">
+			</div>
+
+			<div class="col-md-4">
+				<input th:field="*{email}" class="form-control" type="text"
+					placeholder="Email">
+			</div>
+			<div class="col-md-12">
+				<input th:field="*{address}" class="form-control" type="text"
+					placeholder="Address">
+			</div>
+			<div class="col-md-12">
+				<input th:field="*{activated}" type="hidden"> <input
+					th:field="*{password}" type="hidden">
+				<button class="btn">Update Account</button>
+				<br> <br>
+			</div>
+		</div>
+	</form>
+	<h4>Password change</h4>
+	<form action="/user/account/change-password" method="post"
+		th:object="${form}">
+		<div class="row">
+			<div class="col-md-12">
+				<input class="form-control" type="password" name="password"
+					placeholder="Current Password">
+			</div>
+			<div class="col-md-6">
+				<input class="form-control" name="newPass" type="password"
+					placeholder="New Password">
+			</div>
+			<div class="col-md-6">
+				<input class="form-control" type="password" name="confirm"
+					placeholder="Confirm Password">
+			</div>
+			<div class="col-md-12">
+				<button class="btn">Save Changes</button>
+			</div>
+		</div>
+	</form>
+</div>
+</html>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.pro.cart.CartService;
 import com.pro.entity.Order;
 
 public interface OrderService {
@@ -20,5 +21,9 @@ public interface OrderService {
 	void deleteById(Long id);
 
 	Page<Order> findPageByStatusId(Integer statusId, Pageable pageable);
+
+	void create(Order order, CartService cartService);
+
+	List<Order> findByUserName(String username);
 
 }

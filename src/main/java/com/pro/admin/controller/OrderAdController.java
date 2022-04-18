@@ -2,6 +2,7 @@ package com.pro.admin.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,8 +41,8 @@ public class OrderAdController {
 	
 	// luu id vao session để khi hiện 
 	@RequestMapping("/status/{statusId}")
-	public String StatusId(@PathVariable("statusId") Integer statusId) {
-		sessionService.set("statusId", statusId);
+	public String StatusId(@PathVariable("statusId") Optional<Integer> statusId) {
+		sessionService.set("statusId", statusId.orElse(1));
 		return "forward:/admin/order/paginate/0";
 	}
 	
@@ -91,7 +92,7 @@ public class OrderAdController {
 	public String DanhSach(Model model) {
 		Integer statusId = sessionService.get("statusId",0);
 		Integer pageNumber = sessionService.get("pageNumber", 0);
-		Pageable pageable = PageRequest.of(pageNumber, 2);
+		Pageable pageable = PageRequest.of(pageNumber, 4);
 		Page<Order> page = orderService.findPageByStatusId(statusId, pageable);
 		model.addAttribute("page", page);
 		return "admin/order/index";

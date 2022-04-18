@@ -1,322 +1,122 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<header class="header">
+<script>
+$("a[href*=lang]").on("click",function(){
+	let url =$this.attr("href");
+	$.get(url).then(resp => location.reload());
+	return false;
+});
+</script>
+<!-- Top bar Start -->
+<div class="top-bar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <i class="fa fa-envelope"></i> truongthanhbinh572000@gmail.com
+      </div>
+      <div class="col-sm-4"><i class="fa fa-phone-alt"></i> +84 9018 50057</div>
+      <div class="col-sm-2"> <a href="?lang=en">English</a> ||
+       							<a href="?lang=vi">Tiếng Việt</a></div>
+    </div>
+  </div>
+</div>
+<!-- Top bar End -->
 
-	<!-- Top Bar -->
+<!-- Nav Bar Start -->
+<div class="nav">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <a href="#" class="navbar-brand">MENU</a>
+      <button
+        type="button"
+        class="navbar-toggler"
+        data-toggle="collapse"
+        data-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-	<div class="top_bar">
-		<div class="container">
-			<div class="row">
-				<div class="col d-flex flex-row">
-					<div class="top_bar_contact_item">
-						<div class="top_bar_icon">
-							<img src="/images/phone.png" alt="">
-						</div>
-						+84 9018 50057
-					</div>
-					<div class="top_bar_contact_item">
-						<div class="top_bar_icon">
-							<img src="images/mail.png" alt="">
-						</div>
-						<a href="mailto:truongthanhbinh572000@gmail.com">truongthanhbinh572000@gmail.com</a>
-					</div>
-					<div class="top_bar_content ml-auto">
-						<div class="top_bar_menu">
-							<ul class="standard_dropdown top_bar_dropdown">
-								<li><a href="#">English<i class="fas fa-chevron-down"></i></a>
-									<ul>
-										<li><a href="#">Vietnamese</a></li>
-										<li><a href="#">Spanish</a></li>
-										<li><a href="#">Japanese</a></li>
-									</ul></li>
-								<li><a href="#">$ US dollar<i
-										class="fas fa-chevron-down"></i></a>
-									<ul>
-										<li><a href="#">VND</a></li>
-										<li><a href="#">GBP British Pound</a></li>
-										<li><a href="#">JPY Japanese Yen</a></li>
-									</ul></li>
-							</ul>
-						</div>
-						<div class="top_bar_user">
-							<div class="user_icon">
-								<img src="/images/user.svg" alt="">
-							</div>
-							<div>
-								<a href="#">Register</a>
-							</div>
-							<div>
-								<a href="#">Sign in</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div
+        class="collapse navbar-collapse justify-content-between"
+        id="navbarCollapse">
+        <div class="navbar-nav mr-auto">
+          <a href="index.html" class="nav-item nav-link" th:text="#{menu.home}">Home</a>
+          <a href="/user/product/index" class="nav-item nav-link active"
+            th:text="#{menu.products}"> Products</a
+          >
+          <a href="product-detail.html" class="nav-item nav-link"
+            >Product Detail</a
+          >
+          <a href="cart.html" class="nav-item nav-link">Cart</a>
+          <a href="checkout.html" class="nav-item nav-link">Checkout</a>
+          <a href="my-account.html" class="nav-item nav-link">My Account</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+              >More Pages</a
+            >
+            <div class="dropdown-menu">
+              <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+              <a href="login.html" class="dropdown-item">Login And Register</a>
+              <a href="contact.html" class="dropdown-item">Contact Us</a>
+            </div>
+          </div>
+        </div>
+        <div class="navbar-nav ml-auto">
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+              th:text="@{|${#request.remoteUser == null ? 'User Account' : 'Have a nice day! '+ #request.remoteUser}|}">HEllo</a
+            >
+            <div class="dropdown-menu" th:if="${#request.remoteUser == null}">
+              <a href="/security/login/form" class="dropdown-item">Login</a>
+              <a href="/user/account/register" class="dropdown-item">Register</a>
+              <a href="/user/account/forgot-password" class="dropdown-item">Forgot Password</a>
+            </div>
+            <div class="dropdown-menu" th:unless="${#request.remoteUser == null}">
+               <a href="/user/account/index" class="dropdown-item">Profile User</a>
+               <a href="/user/order/items-purchased" class="dropdown-item">Items Purchased</a>
+                <a href="/spring/logout" class="dropdown-item">Sign Out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+<!-- Nav Bar End -->
 
-	<!-- Header Main -->
-
-	<div class="header_main">
-		<div class="container">
-			<div class="row">
-
-				<!-- Logo -->
-				<div class="col-lg-2 col-sm-3 col-3 order-1">
-					<div class="logo_container">
-						<div class="logo">
-							<a href="/user/home/index">OneTech</a>
-						</div>
-					</div>
-				</div>
-
-				<!-- Search -->
-				<div th:replace="~{/user/category/search}"></div>
-
-				<!-- Wishlist -->
-				<div
-					class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
-					<div
-						class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-						<div
-							class="wishlist d-flex flex-row align-items-center justify-content-end">
-							<div class="wishlist_icon">
-								<img src="/images/heart.png" alt="">
-							</div>
-							<div class="wishlist_content">
-								<div class="wishlist_text">
-									<a href="#">Wishlist</a>
-								</div>
-								<div class="wishlist_count">115</div>
-							</div>
-						</div>
-
-						<!-- Cart -->
-						<div class="cart">
-							<div
-								class="cart_container d-flex flex-row align-items-center justify-content-end">
-								<div class="cart_icon">
-									<img src="/images/cart.png" alt="">
-									<div class="cart_count cart-count">
-										<span>10</span>
-									</div>
-								</div>
-								<div class="cart_content">
-									<div class="cart_text">
-										<a href="/cart/view">Cart</a>
-									</div>
-									<div class="cart_price cart-amount">$85</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Main Navigation -->
-
-	<nav class="main_nav">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-
-					<div class="main_nav_content d-flex flex-row">
-
-						<!-- Categories Menu -->
-
-						<div th:replace="~{/user/category/_cateNav}"></div>
-
-						<!-- Main Nav Menu -->
-
-						<div class="main_nav_menu ml-auto">
-							<ul class="standard_dropdown main_nav_dropdown">
-								<li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
-								<li class="hassubs"><a href="#">Super Deals<i
-										class="fas fa-chevron-down"></i></a>
-									<ul>
-										<li><a href="#">Menu Item<i
-												class="fas fa-chevron-down"></i></a>
-											<ul>
-												<li><a href="#">Menu Item<i
-														class="fas fa-chevron-down"></i></a></li>
-												<li><a href="#">Menu Item<i
-														class="fas fa-chevron-down"></i></a></li>
-												<li><a href="#">Menu Item<i
-														class="fas fa-chevron-down"></i></a></li>
-											</ul></li>
-										<li><a href="#">Menu Item<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="#">Menu Item<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="#">Menu Item<i
-												class="fas fa-chevron-down"></i></a></li>
-									</ul></li>
-								<li class="hassubs"><a href="#">Featured Brands<i
-										class="fas fa-chevron-down"></i></a>
-									<ul>
-										<li><a href="#">Menu Item<i
-												class="fas fa-chevron-down"></i></a>
-											<ul>
-												<li><a href="#">Menu Item<i
-														class="fas fa-chevron-down"></i></a></li>
-												<li><a href="#">Menu Item<i
-														class="fas fa-chevron-down"></i></a></li>
-												<li><a href="#">Menu Item<i
-														class="fas fa-chevron-down"></i></a></li>
-											</ul></li>
-										<li><a href="#">Menu Item<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="#">Menu Item<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="#">Menu Item<i
-												class="fas fa-chevron-down"></i></a></li>
-									</ul></li>
-								<li class="hassubs"><a href="#">Pages<i
-										class="fas fa-chevron-down"></i></a>
-									<ul>
-										<li><a href="shop.html">Shop<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="product.html">Product<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="blog.html">Blog<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="blog_single.html">Blog Post<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="regular.html">Regular Post<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="cart.html">Cart<i
-												class="fas fa-chevron-down"></i></a></li>
-										<li><a href="contact.html">Contact<i
-												class="fas fa-chevron-down"></i></a></li>
-									</ul></li>
-								<li><a href="blog.html">Blog<i
-										class="fas fa-chevron-down"></i></a></li>
-								<li><a href="contact.html">Contact<i
-										class="fas fa-chevron-down"></i></a></li>
-							</ul>
-						</div>
-
-						<!-- Menu Trigger -->
-
-						<div class="menu_trigger_container ml-auto">
-							<div
-								class="menu_trigger d-flex flex-row align-items-center justify-content-end">
-								<div class="menu_burger">
-									<div class="menu_trigger_text">menu</div>
-									<div class="cat_burger menu_burger_inner">
-										<span></span><span></span><span></span>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
-
-	<!-- Menu -->
-
-	<div class="page_menu">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-
-					<div class="page_menu_content">
-
-						<div class="page_menu_search">
-							<form action="#">
-								<input type="search" required="required"
-									class="page_menu_search_input"
-									placeholder="Search for products...">
-							</form>
-						</div>
-						<ul class="page_menu_nav">
-							<li class="page_menu_item has-children"><a href="#">Language<i
-									class="fa fa-angle-down"></i></a>
-								<ul class="page_menu_selection">
-									<li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
-								</ul></li>
-							<li class="page_menu_item has-children"><a href="#">Currency<i
-									class="fa fa-angle-down"></i></a>
-								<ul class="page_menu_selection">
-									<li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">GBP British Pound<i
-											class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">JPY Japanese Yen<i
-											class="fa fa-angle-down"></i></a></li>
-								</ul></li>
-							<li class="page_menu_item"><a href="#">Home<i
-									class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item has-children"><a href="#">Super
-									Deals<i class="fa fa-angle-down"></i>
-							</a>
-								<ul class="page_menu_selection">
-									<li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
-									<li class="page_menu_item has-children"><a href="#">Menu
-											Item<i class="fa fa-angle-down"></i>
-									</a>
-										<ul class="page_menu_selection">
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-											<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-										</ul></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-								</ul></li>
-							<li class="page_menu_item has-children"><a href="#">Featured
-									Brands<i class="fa fa-angle-down"></i>
-							</a>
-								<ul class="page_menu_selection">
-									<li><a href="#">Featured Brands<i
-											class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-								</ul></li>
-							<li class="page_menu_item has-children"><a href="#">Trending
-									Styles<i class="fa fa-angle-down"></i>
-							</a>
-								<ul class="page_menu_selection">
-									<li><a href="#">Trending Styles<i
-											class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-									<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
-								</ul></li>
-							<li class="page_menu_item"><a href="blog.html">blog<i
-									class="fa fa-angle-down"></i></a></li>
-							<li class="page_menu_item"><a href="contact.html">contact<i
-									class="fa fa-angle-down"></i></a></li>
-						</ul>
-
-						<div class="menu_contact">
-							<div class="menu_contact_item">
-								<div class="menu_contact_icon">
-									<img src="/images/phone_white.png" alt="">
-								</div>
-								+38 068 005 3570
-							</div>
-							<div class="menu_contact_item">
-								<div class="menu_contact_icon">
-									<img src="/images/mail_white.png" alt="">
-								</div>
-								<a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</header>
+<!-- Bottom Bar Start -->
+<div class="bottom-bar">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-3">
+        <div class="logo">
+          <a href="index.html"> <img src="/img/logo.png" alt="Logo" /> </a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="search">
+        	<form action="/product/search">
+          <input type="text" name="keywords" placeholder="Search" />
+          <button>
+            <i class="fa fa-search"></i>
+          </button>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="user">
+        	<!-- Wishlist -->
+          <a href="wishlist.html" class="btn wishlist">
+            <i class="fa fa-heart"></i> <span>(0)</span>
+          </a>
+          
+          	<!-- Cart -->
+          <a href="/cart/view" class="btn cart">
+            <i class="fa fa-shopping-cart"></i> <span class="cart-count">(0)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bottom Bar End -->
 </html>

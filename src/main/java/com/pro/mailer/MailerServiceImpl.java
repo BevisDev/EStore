@@ -14,6 +14,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.pro.entity.Account;
+import com.pro.entity.Order;
 import com.pro.entity.Share;
 
 @Service
@@ -34,10 +36,7 @@ public class MailerServiceImpl implements MailerService {
 		helper.setText(mail.getText(), true);
 		
 		String from = mail.getFrom();
-		if(from == null || from.trim().length() == 0) {
-			from = "Bevis Shop <truongthanhbinh572000@gmail.com>";
-		}
-		else if (!from.contains("<")) {
+		if (!from.contains("<")) {
 			from = "%s <%s>".formatted(from,from);
 		}
 		helper.setFrom(from);
@@ -76,7 +75,7 @@ public class MailerServiceImpl implements MailerService {
 		queue.add(mail);
 	}
 	
-	@Scheduled(fixedDelay = 2000)
+	@Scheduled(fixedDelay = 1500)
 	public void sendingSheduler() {
 		while(!queue.isEmpty()) {
 			Mail mail = queue.remove(0);
@@ -99,6 +98,44 @@ public class MailerServiceImpl implements MailerService {
 		try {
 			Mail mail = new Mail(share.getReceiver(), share.getSubject(), text);
 			this.addToQueue(mail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void sendOrder(Order order) {
+		String url = "http://localhost:8080/user/order/detail/" + order.getId();
+		try {
+			String to = order.getAccount().getEmail();
+			String text = "<hr><a href='%s'> Xem đơn đặt hàng </a>".formatted(url);
+			Mail mail = new Mail(to, "Your Order", text);
+			this.addToQueue(mail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void sendWellcome(Account account) {
+		String url = "http://localhost:8080/user/account/activate?username=" + account.getUsername();
+		try {
+			String to = account.getEmail();
+			String text = "<hr><a href='%s'> Click để kích hoạt tài khoản </a>".formatted(url);
+			Mail mail = new Mail(to, "Wellcome to One Tech Store", text);
+			this.addToQueue(mail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void sendToken(String token, String email) {
+		try {
+			String text ="Code is: " +token;
+			Mail mail = new Mail(email, "Reset password", text);
+			this.addToQueue(mail);
+			System.out.println("was sent");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

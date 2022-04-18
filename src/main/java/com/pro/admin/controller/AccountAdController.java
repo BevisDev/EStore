@@ -110,7 +110,7 @@ public class AccountAdController {
 		model.addAttribute("filter", filter);
 		
 		Integer pageNumber = sessionService.get("pageNumber", 0);
-		Pageable pageable = PageRequest.of(pageNumber, 2);
+		Pageable pageable = PageRequest.of(pageNumber, 4);
 		Page<Account> page = accountService.findPageByFilter(filter,pageable);
 		model.addAttribute("page", page);
 		return "admin/account/index";

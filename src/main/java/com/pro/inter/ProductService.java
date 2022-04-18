@@ -17,7 +17,7 @@ public interface ProductService {
 
 	Page<Product> findByFavorite(Pageable pageable);
 
-	List<Product> findByBestSellerIds(Pageable pageable);
+//	List<Product> findByBestSellerIds(Pageable pageable);
 
 	Page<Product> findBySpecial(Pageable pageable);
 
@@ -30,6 +30,14 @@ public interface ProductService {
 	void deleteById(Integer id);
 
 	Page<Product> findAll(Pageable pageable);
+
+	Page<Product> findBySmallPrice(Pageable pageable);
+
+	Page<Product> findByMediumPrice(Pageable pageable);
+	
+	Page<Product> findByLargePrice(Pageable pageable);
+
+//	List<Product> findByUserName(String username);
 
 
 }

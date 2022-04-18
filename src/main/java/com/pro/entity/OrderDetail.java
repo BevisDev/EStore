@@ -41,4 +41,13 @@ public class OrderDetail {
 	public double getPromotePrice() {
 		return this.unitPrice * ( (100 - this.discount) / 100);
 	}
+	
+	public OrderDetail(Order order, Product product, int quantity) {
+		this.order = order;
+		this.product = product;
+		this.quantity = quantity;
+		// copy unit price and discount from product
+		this.unitPrice = product.getUnitPrice();
+		this.discount = product.getDiscount();
+	}
 }

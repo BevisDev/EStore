@@ -12,10 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pro.dao.BrandDAO;
 import com.pro.entity.Brand;
 import com.pro.entity.Category;
-import com.pro.entity.SubCategory;
 import com.pro.inter.BrandService;
 import com.pro.inter.CategoryService;
-import com.pro.inter.SubCategoryService;
 
 @Service
 public class GlobalInterceptor implements HandlerInterceptor {
@@ -26,9 +24,6 @@ public class GlobalInterceptor implements HandlerInterceptor {
 	@Autowired
 	BrandService brandService;
 
-	@Autowired
-	SubCategoryService subCategoryService;
-
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
@@ -36,7 +31,6 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		request.setAttribute("categories", list);
 		List<Brand> brands = brandService.findAll();
 		request.setAttribute("brands", brands);
-		List<SubCategory> subs = subCategoryService.findAll();
-		request.setAttribute("subs", subs);
+	
 	}
 }

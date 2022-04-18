@@ -1,0 +1,20 @@
+<div class="col-lg-4 sidebar" xmlns:th="http://www.thymeleaf.org">
+    <div class="sidebar-widget brands">
+        <h2 class="title">Category</h2>
+     
+            <ul>
+                <th:block th:each="cate: ${categories}">
+                <li class="nav-item">
+                        <a class="nav-link" th:href="@{|/user/product/category?id=${cate.id}|}">
+                                <i class="fa fa-laptop"></i> [[${cate.name}]]
+                        </a>
+                       <span class="pt-2"> ([[${cate.products.size()}]])</span> 
+                </li>
+                </th:block>
+            </ul>
+   
+    </div>
+
+    <!-- BRAND  -->
+    <div th:replace="~{/user/category/_brand}"></div>
+</div>

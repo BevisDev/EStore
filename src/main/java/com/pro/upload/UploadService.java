@@ -32,4 +32,5 @@ public interface UploadService {
 	 * @return đối tượng file
 	 */
 	File getFile(String virtualPath);
+
 }

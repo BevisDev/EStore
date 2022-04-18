@@ -1,24 +1,57 @@
-<html th:replace="/user/shared/layout::dynamic(~{::main})" xmlns:th="http://www.thymeleaf.org">
-<main class="container-fluid mt-3">
-    <h3 class="alert alert-success">LOGIN</h3>
-    <div th:text="${message}"></div>
-    <form action="/spring/login" method="post">
-        <div class="mb-3">
-            <label>Username</label>
-            <input name="username" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label>Password</label>
-            <input name="password" class="form-control">
-        </div>
-        <div class="mb-3">
-            <input name="remember-me" type="checkbox">
-            <label>Remember me?</label>
-        </div>
-        <div class="mb-3">
-            <button class="btn btn-primary">Login</button>
-        </div>
-    </form>
-</main>
+<html xmlns:th="http://www.thymeleaf.org"
+th:replace="~{/user/shared/layout::dynamic(~{::main})}">
+<th:block th:fragment="main">
+<!-- Login  -->
+<link rel="stylesheet" href="/login/css/style.css" />
+<link rel="stylesheet" href="/login/css/font-awesome.css" />
+<div class="form-36-mian section-gap">
+    <div class="wrapper">
+        <div class="form-inner-cont">
+            <h3>Sign in</h3>
+            <span class="text-danger float-end"th:text="${message}"></span>
+            <th:block th:if="${#request.remoteUser == null}" th:class="@{|display:none|}">
+            <form action="/spring/login" method="post" class="signin-form">
+                <div class="form-input">
+                    <span class="fas fa-user" aria-hidden="true">
+                    </span> <input type="text" name="username" placeholder="username" required />
+                </div>
+                <div class="form-input">
+		<span class="fas fa-key" aria-hidden="true">
+		</span> <input type="password" name="password" placeholder="Password" required />
+                </div>
+                <div class="login-remember d-grid">
+                    <label class="check-remaind">
+                        <input type="checkbox" name="remember-me">
+                        <span class="checkmark"></span>
+                        <p class="remember">Remember me</p>
+                    </label>
+                    <button class="btn theme-button">Sign in</button>
+                </div>
+                <div class="new-signup">
+                    <a href="#reload" class="signuplink">Forgot Password</a>
+                </div>
+            </form>
+            <div class="social-icons">
+                <p class="continue"><span>OR</span></p>
+                <div class="social-login">
+                    <a href="/oauth2/facebook">
+                        <div class="facebook">
+                            <span class="fab fa-facebook" aria-hidden="true"></span>
 
+                        </div>
+                    </a>
+                    <a href="/oauth2/google">
+                        <div class="google">
+                            <span class="fab fa-google" aria-hidden="true"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <p class="signup">Don't have account? 
+            <a href="/spring/register" class="signuplink">Register</a></p>
+            </th:block>
+        </div>
+    </div>
+</div>
+</th:block>
 </html>

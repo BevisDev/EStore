@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/shared/layout::dynamic(~{::register})}">
+<th:block th:fragment="register">
+<link rel="stylesheet" href="/register/css/style.css" />
+<link rel="stylesheet" href="/register/css/font-awesome.css" />
+<div class="w3-main" >
+	<!-- Main -->
+	<div class="about-bottom main-agile book-form">
+		<div class="alert-close"></div>
+		<h2 class="tittle">FORM REGISTER</h2>
+		<h3 style="color: red">
+			<i th:text="${message}"></i>
+		</h3>
+		<form action="/user/account/register" method="post" th:object="${form}">
+			<div class="form-date-w3-agileits">
+				<label> User Name </label> 
+				<input type="text" th:field="*{username}"
+					placeholder="User Name"> 
+				<label> Password </label>
+				<input type="password" th:field="*{password}" placeholder="Your Password">
+				<label> Confirm Password</label> 
+				<input type="password" name="confirm"
+					 placeholder="Confirm Password"> 
+				<input type="hidden" th:field="*{avatar}">
+				<input type="hidden" th:field="*{address}">
+				<label> Full Name </label> 
+				<input type="text" th:field="*{fullname}"
+					placeholder="Họ và tên"> 
+				<label> Phone Number </label> 
+				<input type="text" th:field="*{phone}" placeholder="Phone Number"> 
+				<label> Email </label> 
+				<input type="email" th:field="*{email}" placeholder="Email">
+				<input type="hidden" name="activated" value="false">
+			</div>
+			<div class="make wow shake">
+				<input type="submit" value="Register">
+			</div>
+		</form>
+	</div>
+	<!-- //Main -->
+</div>
+</th:block>
+</html>
