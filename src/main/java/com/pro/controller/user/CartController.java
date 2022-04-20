@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pro.cart.CartService;
+import com.pro.entity.Product;
 
 @Controller
 public class CartController {

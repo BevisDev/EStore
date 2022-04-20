@@ -122,7 +122,7 @@ public class MailerServiceImpl implements MailerService {
 		try {
 			String to = account.getEmail();
 			String text = "<hr><a href='%s'> Click để kích hoạt tài khoản </a>".formatted(url);
-			Mail mail = new Mail(to, "Wellcome to One Tech Store", text);
+			Mail mail = new Mail(to, "Wellcome to EStore", text);
 			this.addToQueue(mail);
 		} catch (Exception e) {
 			e.printStackTrace();
