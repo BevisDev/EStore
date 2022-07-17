@@ -1,6 +1,7 @@
 package com.pro.security;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,7 +26,7 @@ public class UserDetailsImpl implements UserDetails {
 		return	account.getAuthorities().stream()
 				.map(a -> a.getRole())
 				.map(r -> new SimpleGrantedAuthority("ROLE_" + r.getId()) )
-				.toList();
+				.collect(Collectors.toList());
 
 	}
 

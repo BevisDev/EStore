@@ -37,7 +37,7 @@ public class MailerServiceImpl implements MailerService {
 		
 		String from = mail.getFrom();
 		if (!from.contains("<")) {
-			from = "%s <%s>".formatted(from,from);
+			from = String.format("%s <%s>", from,from);
 		}
 		helper.setFrom(from);
 		helper.setReplyTo(from);
@@ -60,6 +60,7 @@ public class MailerServiceImpl implements MailerService {
 			 try {
 				 helper.addAttachment(file.getName(), file);
 			 } catch (Exception e) {
+				 System.out.println("loi");
 				e.printStackTrace();
 			}
 		  });
@@ -94,7 +95,7 @@ public class MailerServiceImpl implements MailerService {
 	public void sendShare(Share share) {
 		String url = "http://localhost:8080/user/product/detail/" + share.getProduct().getId();
 		String text = share.getText();
-		text += "<hr><a href='%s'> Link sản phẩm </a>".formatted(url);
+		text += String.format("<hr><a href='%s'> Link sản phẩm </a>", url);
 		try {
 			Mail mail = new Mail(share.getReceiver(), share.getSubject(), text);
 			this.addToQueue(mail);
@@ -108,7 +109,7 @@ public class MailerServiceImpl implements MailerService {
 		String url = "http://localhost:8080/user/order/detail/" + order.getId();
 		try {
 			String to = order.getAccount().getEmail();
-			String text = "<hr><a href='%s'> Xem đơn đặt hàng </a>".formatted(url);
+			String text = "<hr><a href='%s'> Xem đơn đặt hàng </a>".format(url);
 			Mail mail = new Mail(to, "Your Order", text);
 			this.addToQueue(mail);
 		} catch (Exception e) {
@@ -121,7 +122,7 @@ public class MailerServiceImpl implements MailerService {
 		String url = "http://localhost:8080/user/account/activate?username=" + account.getUsername();
 		try {
 			String to = account.getEmail();
-			String text = "<hr><a href='%s'> Click để kích hoạt tài khoản </a>".formatted(url);
+			String text = "<hr><a href='%s'> Click để kích hoạt tài khoản </a>".format(url);
 			Mail mail = new Mail(to, "Wellcome to EStore", text);
 			this.addToQueue(mail);
 		} catch (Exception e) {

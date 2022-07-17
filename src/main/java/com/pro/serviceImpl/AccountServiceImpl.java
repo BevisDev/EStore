@@ -1,7 +1,7 @@
 package com.pro.serviceImpl;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -97,7 +97,7 @@ public class AccountServiceImpl implements AccountService {
 			Role role = roleDAO.getById(rid);
 			Authority authority = new Authority(null, role, account);
 			return authority;
-		}).toList();
+		}).collect(Collectors.toList());
 		account.setAuthorities(authorities);
 		// luu vao Account xuong sql
 		dao.save(account);
@@ -116,7 +116,7 @@ public class AccountServiceImpl implements AccountService {
 				Role role = roleDAO.getById(rid);
 				Authority authority = new Authority(null, role, account);
 				return authority;
-			}).toList();
+			}).collect(Collectors.toList());
 			// luu vao authority
 			authorDAO.saveAll(authorities);
 			// set vao account

@@ -1,6 +1,7 @@
 package com.pro.serviceImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,7 +62,7 @@ public class OrderServiceImpl implements OrderService{
 		dao.save(order);
 		List<OrderDetail> list = cartService.getItems().stream().map(item -> {
 			return new OrderDetail(order, item.getProduct(), item.getQty());
-		}).toList();
+		}).collect(Collectors.toList());
 		ddao.saveAll(list);
 	}
 

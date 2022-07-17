@@ -84,6 +84,7 @@ public class ProductUserController {
 	  @ResponseBody
 	  @RequestMapping("/share-send") 
 	  public void shareSend(@RequestBody Share share){ 
+		  share.setSender("trthanhbinh5720@gmail.com");
 		  shareService.create(share); //send mail
 		  mailerService.sendShare(share);
 	  

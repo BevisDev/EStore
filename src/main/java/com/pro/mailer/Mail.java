@@ -34,7 +34,7 @@ public class Mail {
 		this.to = to;
 		this.subject = subject;
 		this.text = text;
-		this.from = others.getOrDefault("from", "EStore <truongthanhbinh572000@gmail.com>");
+		this.from = others.getOrDefault("from", "EStore <trthanhbinh572000@gmail.com>");
 		this.cc = others.get("cc");
 		this.bcc = others.get("bc");
 		this.attachments = others.get("attachments");
